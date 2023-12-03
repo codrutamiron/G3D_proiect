@@ -1,5 +1,23 @@
 #include "Camera.h"
 
+void Camera::ProcessMouseMovement(float xOffset, float yOffset, bool constrainPitch)
+{
+    yaw += xOffset;
+    pitch += yOffset;
+
+    //std::cout << "yaw = " << yaw << std::endl;
+    //std::cout << "pitch = " << pitch << std::endl;
+
+    if (constrainPitch) {
+        if (pitch > 89.0f)
+            pitch = 89.0f;
+        if (pitch < -89.0f)
+            pitch = -89.0f;
+    }
+
+    UpdateCameraVectors();
+}
+
 void Camera::UpdateCameraVectors()
 {
 
@@ -87,4 +105,47 @@ void Camera::ProcessKeyboard(ECameraMovementType direction, float deltaTime)
         position -= up * velocity;
         break;
     }
+}
+
+void Camera::MouseControl(float xPos, float yPos)
+{
+    if (bFirstMouseMove) {
+        lastX = xPos;
+        lastY = yPos;
+        bFirstMouseMove = false;
+    }
+
+    float xChange = xPos - lastX;
+    float yChange = lastY - yPos;
+    lastX = xPos;
+    lastY = yPos;
+
+    if (fabs(xChange) <= 1e-6 && fabs(yChange) <= 1e-6) {
+        return;
+    }
+    xChange *= mouseSensitivity;
+    yChange *= mouseSensitivity;
+
+}
+
+void Camera::ProcessMouseScroll(float yOffset)
+{
+    if (FoVy >= 1.0f && FoVy <= 90.0f) {
+        FoVy -= yOffset;
+    }
+    if (FoVy <= 1.0f)
+        FoVy = 1.0f;
+    if (FoVy >= 90.0f)
+        FoVy = 90.0f;
+}
+
+glm::vec3 Camera::GetRightVector() const
+{
+    return right;
+
+}
+
+glm::vec3 Camera::GetUpVector() const
+{
+    return up;
 }

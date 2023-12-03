@@ -33,16 +33,32 @@ private:
     const float PITCH = 0.0f;
     const float FOV = 45.0f;
     glm::vec3 startPosition;
+    void ProcessMouseMovement(float xOffset, float yOffset, bool constrainPitch = true);
     void UpdateCameraVectors();
 
 
 public: 
     Camera(const int width, const int height, const glm::vec3& position);
+
     void Set(const int width, const int height, const glm::vec3& position);
+    
     const glm::vec3 GetPosition() const;
+    
     const glm::mat4 GetViewMatrix() const;
+    
     const glm::mat4 GetProjectionMatrix() const;
+    
     void ProcessKeyboard(ECameraMovementType direction, float deltaTime);
+
+    void MouseControl(float xPos, float yPos);
+
+    void ProcessMouseScroll(float yOffset);
+
+    glm::vec3 GetRightVector() const;
+
+    glm::vec3 GetUpVector() const;
+
+
 
 protected:
     const float cameraSpeedFactor = 2.5f;
