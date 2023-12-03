@@ -1,5 +1,18 @@
 #include "Camera.h"
 
+void Camera::UpdateCameraVectors()
+{
+
+    // Calculate the new forward vector
+    this->forward.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    this->forward.y = sin(glm::radians(pitch));
+    this->forward.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    this->forward = glm::normalize(this->forward);
+    // Also re-calculate the Right and Up vector
+    right = glm::normalize(glm::cross(forward, worldUp));  // Normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+    up = glm::normalize(glm::cross(right, forward));
+}
+
 Camera::Camera(const int width, const int height, const glm::vec3& position)
 {
 	startPosition = position;
@@ -49,4 +62,29 @@ const glm::mat4 Camera::GetProjectionMatrix() const
             -height / scaleFactor, height / scaleFactor, -zFar, zFar);
     }
     return Proj;
+}
+
+void Camera::ProcessKeyboard(ECameraMovementType direction, float deltaTime)
+{
+    float velocity = (float)(cameraSpeedFactor * deltaTime);
+    switch (direction) {
+    case ECameraMovementType::FORWARD:
+        position += forward * velocity;
+        break;
+    case ECameraMovementType::BACKWARD:
+        position -= forward * velocity;
+        break;
+    case ECameraMovementType::LEFT:
+        position -= right * velocity;
+        break;
+    case ECameraMovementType::RIGHT:
+        position += right * velocity;
+        break;
+    case ECameraMovementType::UP:
+        position += up * velocity;
+        break;
+    case ECameraMovementType::DOWN:
+        position -= up * velocity;
+        break;
+    }
 }
