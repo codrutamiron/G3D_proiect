@@ -149,6 +149,7 @@
   <ItemGroup>
     <None Include="ShadowMapping.fs" />
     <None Include="ShadowMapping.vs" />
+    <None Include="ShadowMappingDepth.fs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

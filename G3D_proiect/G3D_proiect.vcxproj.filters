@@ -40,5 +40,9 @@
     <None Include="ShadowMapping.fs">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="ShadowMapping.vs" />
+    <None Include="ShadowMappingDepth.fs">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
