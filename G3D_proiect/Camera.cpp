@@ -57,6 +57,11 @@ void Camera::Set(const int width, const int height, const glm::vec3& position)
     bFirstMouseMove = true;
 }
 
+void Camera::Reset(const int width, const int height)
+{
+    Set(width, height, startPosition);
+}
+
 const glm::vec3 Camera::GetPosition() const
 {
     return position;

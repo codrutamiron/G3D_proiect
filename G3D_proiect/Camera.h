@@ -40,6 +40,7 @@ public:
     Camera(const int width, const int height, const glm::vec3& position);
 
     void Set(const int width, const int height, const glm::vec3& position);
+    void Reset(const int width, const int height);
     
     const glm::vec3 GetPosition() const;
     
