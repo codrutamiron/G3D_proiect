@@ -74,13 +74,19 @@
     <IncludePath>C:\Users\stefa\Desktop\Facultate\G3D\glew-2.1.0\include;C:\Users\stefa\Desktop\Facultate\G3D\glm-stable\glm;C:\Users\stefa\Desktop\Facultate\G3D\Free glut4\freeglut\include;C:\Users\stefa\Desktop\Facultate\G3D\glfw-3.3.4.bin.WIN32\include\GLFW;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\stefa\Desktop\Facultate\G3D\glew-2.1.0\bin\Release\Win32;C:\Users\stefa\Desktop\Facultate\G3D\Free glut4\freeglut\lib;C:\Users\stefa\Desktop\Facultate\G3D\glfw-3.3.4.bin.WIN32\lib-vc2019;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\40754\Desktop\Anul 2\G3D\G3D_proiect\linking\STB;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\40754\Desktop\Anul 2\G3D\G3D_proiect\linking\STB;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\linking\GLM\include;$(SolutionDir)\linking\GLEW\include;$(SolutionDir)\linking\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\linking\STB;$(SolutionDir)\linking\GLM\include;$(SolutionDir)\linking\GLEW\include;$(SolutionDir)\linking\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -97,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\linking\GLM\include;$(SolutionDir)\linking\GLEW\include;$(SolutionDir)\linking\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\linking\STB;$(SolutionDir)\linking\GLM\include;$(SolutionDir)\linking\GLEW\include;$(SolutionDir)\linking\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
