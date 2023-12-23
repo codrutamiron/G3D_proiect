@@ -158,6 +158,7 @@
     <None Include="ShadowMappingDepth.fs" />
     <None Include="ShadowMappingDepth.vs" />
     <None Include="Water.fs" />
+    <None Include="Water.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
