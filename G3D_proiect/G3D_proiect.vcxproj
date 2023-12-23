@@ -158,6 +158,7 @@
     <None Include="ShadowMappingDepth.fs" />
     <None Include="ShadowMappingDepth.vs" />
     <None Include="Sky.fs" />
+    <None Include="Sky.vs" />
     <None Include="Water.fs" />
     <None Include="Water.vs" />
   </ItemGroup>

@@ -50,5 +50,6 @@
     <None Include="Water.fs" />
     <None Include="Water.vs" />
     <None Include="Sky.fs" />
+    <None Include="Sky.vs" />
   </ItemGroup>
 </Project>
