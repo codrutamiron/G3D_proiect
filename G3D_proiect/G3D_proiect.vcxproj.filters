@@ -49,5 +49,6 @@
     </None>
     <None Include="Water.fs" />
     <None Include="Water.vs" />
+    <None Include="Sky.fs" />
   </ItemGroup>
 </Project>
