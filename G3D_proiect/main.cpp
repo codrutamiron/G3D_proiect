@@ -57,8 +57,6 @@ void renderScene(const Shader& shader);
 void renderCube();
 void renderFloor();
 
-// timing
-	// time between current frame and last frame
 
 bool isRotating = false;
 int main(int argc, char** argv)

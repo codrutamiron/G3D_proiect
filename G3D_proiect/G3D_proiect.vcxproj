@@ -75,10 +75,10 @@
     <LibraryPath>C:\Users\stefa\Desktop\Facultate\G3D\glew-2.1.0\bin\Release\Win32;C:\Users\stefa\Desktop\Facultate\G3D\Free glut4\freeglut\lib;C:\Users\stefa\Desktop\Facultate\G3D\glfw-3.3.4.bin.WIN32\lib-vc2019;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\40754\Desktop\Anul 2\G3D\G3D_proiect\linking\STB;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\linking\STB;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\40754\Desktop\Anul 2\G3D\G3D_proiect\linking\STB;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\linking\STB;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
