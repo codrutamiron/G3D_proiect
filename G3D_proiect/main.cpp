@@ -258,11 +258,7 @@ int main(int argc, char** argv)
 
 
 		//Render sky
-		skyBox.Use();
-		skyBox.SetMat4("projection", projection);
-		skyBox.SetMat4("view", glm::mat4(glm::mat3(pCamera->GetViewMatrix())));
-		shaderWater.SetVec3("viewPos", pCamera->GetPosition());
-		renderSky(skyBox);
+		
 
 		// set light uniforms
 		shadowMappingShader.SetVec3("viewPos", pCamera->GetPosition());
