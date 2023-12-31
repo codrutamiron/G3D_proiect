@@ -4,13 +4,45 @@
 #include "Shader.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
-
+#include <vector>
+#include <string>
 
 double deltaTime = 0.0f;	// time between current frame and last frame
 double lastFrame = 0.0f;
 const unsigned int SCR_WIDTH = 1800;
 const unsigned int SCR_HEIGHT = 900;
 Camera* pCamera = nullptr;
+
+
+unsigned int loadCubemap(std::vector<std::string> faces)
+{
+	unsigned int textureID;
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+	int width, height, nrChannels;
+	for (unsigned int i = 0; i < faces.size(); i++)
+	{
+		unsigned char* data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+		if (data)
+		{
+			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+		}
+		else
+		{
+			std::cout << "Cubemap texture failed to load at path: " << faces[i] << std::endl;
+			stbi_image_free(data);
+		}
+	}
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+	return textureID;
+}
 
 unsigned int CreateTexture(const std::string& strTexturePath)
 {
@@ -104,7 +136,7 @@ int main(int argc, char** argv)
 	// -------------------------
 	Shader shadowMappingShader("ShadowMapping.vs", "ShadowMapping.fs");
 	Shader shadowMappingDepthShader("ShadowMappingDepth.vs", "ShadowMappingDepth.fs");
-
+	Shader skyBox("Sky.vs", "Sky.fs");
 	// load textures
 	// -------------
 	unsigned int floorTexture = CreateTexture(strExePath + "\\ColoredFloor.png");
@@ -136,12 +168,23 @@ int main(int argc, char** argv)
 
 	// shader configuration
 	// --------------------
+	skyBox.Use();
+	skyBox.SetInt("skybox", 0);
 	shadowMappingShader.Use();
 	shadowMappingShader.SetInt("diffuseTexture", 0);
 	shadowMappingShader.SetInt("shadowMap", 1);
 
 	// lighting info
 	// -------------
+
+	unsigned int cubeMapTexture = loadCubemap({
+		strExePath + "\\skybox\\right.jpg",
+		strExePath + "\\skybox\\left.jpg",
+		strExePath + "\\skybox\\top.jpg",
+		strExePath + "\\skybox\\bottom.jpg",
+		strExePath + "\\skybox\\front.jpg",
+		strExePath + "\\skybox\\back.jpg"
+		});
 
 	glEnable(GL_CULL_FACE);
 
@@ -212,6 +255,15 @@ int main(int argc, char** argv)
 		glm::mat4 view = pCamera->GetViewMatrix();
 		shadowMappingShader.SetMat4("projection", projection);
 		shadowMappingShader.SetMat4("view", view);
+
+
+		//Render sky
+		skyBox.Use();
+		skyBox.SetMat4("projection", projection);
+		skyBox.SetMat4("view", glm::mat4(glm::mat3(pCamera->GetViewMatrix())));
+		shaderWater.SetVec3("viewPos", pCamera->GetPosition());
+		renderSky(skyBox);
+
 		// set light uniforms
 		shadowMappingShader.SetVec3("viewPos", pCamera->GetPosition());
 		shadowMappingShader.SetVec3("lightPos", lightPos);
