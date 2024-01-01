@@ -70,5 +70,11 @@
     <None Include="Sky.fs" />
     <None Include="Sky.vs" />
     <None Include="packages.config" />
+    <None Include="CubeMap.fs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="CubeMap.vs">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

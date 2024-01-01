@@ -161,6 +161,8 @@
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CubeMap.fs" />
+    <None Include="CubeMap.vs" />
     <None Include="packages.config" />
     <None Include="ShadowMapping.fs" />
     <None Include="ShadowMapping.vs" />
