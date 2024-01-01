@@ -177,12 +177,12 @@ int main(int argc, char** argv)
 	// -------------
 
 	unsigned int cubeMapTexture = loadCubemap({
-		strExePath + "\\skybox\\right.jpg",
-		strExePath + "\\skybox\\left.jpg",
-		strExePath + "\\skybox\\top.jpg",
-		strExePath + "\\skybox\\bottom.jpg",
-		strExePath + "\\skybox\\front.jpg",
-		strExePath + "\\skybox\\back.jpg"
+		strExePath + "\\right.jpg",
+		strExePath + "\\left.jpg",
+		strExePath + "\\top.jpg",
+		strExePath + "\\bottom.jpg",
+		strExePath + "\\front.jpg",
+		strExePath + "\\back.jpg"
 		});
 
 	glEnable(GL_CULL_FACE);
