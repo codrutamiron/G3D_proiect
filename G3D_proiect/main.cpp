@@ -195,9 +195,6 @@ int main(int argc, char** argv)
 	// lighting info
 	// -------------
 
-	
-
-	
 
 	// render loop
 	// -----------
@@ -427,10 +424,10 @@ void processInput(GLFWwindow* window)
 // ---------------------------------------------------------------------------------------------
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	// make sure the viewport matches the new window dimensions; note that width and 
-	// height will be significantly larger than specified on retina displays.
+	glViewport(0, 0, width, height);
 	pCamera->Reshape(width, height);
 }
+	
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
