@@ -2,7 +2,6 @@
 #include <iostream>
 #include "Camera.h"
 #include "Shader.h"
-#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include <vector>
 #include <string>
@@ -124,7 +123,7 @@ int main(int argc, char** argv)
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	glewInit();
-	s
+	
 	// Create camera
 	pCamera = new Camera(SCR_WIDTH, SCR_HEIGHT, glm::vec3(0.0, 1.0, 3.0));
 
