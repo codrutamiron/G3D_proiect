@@ -202,7 +202,7 @@ Mesh* coral1, * shell1, * star;
 BubbleParticleGenerator* bubble;
 AquariumPane* overlay;
 Cube* skyBoxCube;
-Cube* topAquarium;
+//Cube* topAquarium;
 Cube* sofaLow, * sofaHigh, * sofaLeft, * sofaRight;
 Plane* plnWallFront1, * plnWallFront2, * plnWallFrontBtm, * plnWallFrontTop, * plnWallRight1, * plnWallRight2, * plnWallBack1, * plnWallBack2;
 Plane* plnWallLeft1, * plnWallLeft2, * plnWallLeftBtm, * plnWallLeftTop;
@@ -540,7 +540,7 @@ void subrenderObjects(const Shader& shader)
 	star->renderBasic(shader, { 1.7f, 0.f, -0.8f });
 
 	//Top Aquarium
-	topAquarium->renderBasic(shader);
+	//topAquarium->renderBasic(shader);
 }
 
 
@@ -665,11 +665,11 @@ void createObjects()
 	plnWallBack2 = new Plane(glm::vec3{ 0, -0.2, 5 }, { 6,5,5 }, TEXSCALE::TS_SCALE);
 	plnWallBack2->setDiffuseTextureId(wallTexture);
 
-	plnWallLeft1 = new Plane(glm::vec3{ -6, -0.2, 5 }, { -6,5,1 }, TEXSCALE::TS_SCALE);
+	plnWallLeft1 = new Plane(glm::vec3{ -6, -0.2, 5}, { -6,5,-2.1 }, TEXSCALE::TS_NO_SCALE);
 	plnWallLeft1->setDiffuseTextureId(wallTexture);
 
 	plnWallLeft2 = new Plane(glm::vec3{ -6, -0.2, -7 }, { -6,5,-10 }, TEXSCALE::TS_SCALE);
-	plnWallLeft2->setDiffuseTextureId(wallTexture);
+	plnWallLeft2->setDiffuseTextureId(wallTexture); 
 
 	plnWallLeftBtm = new Plane(glm::vec3{ -6, -0.2, 1 }, { -6,1.2,-7 }, TEXSCALE::TS_NO_SCALE);
 	plnWallLeftBtm->setDiffuseTextureId(wallTexture);
@@ -687,7 +687,7 @@ void createObjects()
 	plnFrontWindow = new Plane(glm::vec3{ -2, 1.2, -10 }, { 2,4,-10 }, TEXSCALE::TS_NO_SCALE);
 	plnFrontWindow->setDiffuseTextureId(glassTexture);
 
-	plnLeftWindow = new Plane(glm::vec3{ -6, 1.2, 1 }, { -6,4,-7 }, TEXSCALE::TS_NO_SCALE);
+	plnLeftWindow = new Plane(glm::vec3{ -6, 1.2, -2.1 }, { -6,4,-7 }, TEXSCALE::TS_NO_SCALE);
 	plnLeftWindow->setDiffuseTextureId(glassTexture);
 
 	//Sofa
@@ -719,32 +719,32 @@ void createObjects()
 	//Skybox
 	skyBoxCube = new Cube({ -100,-100,-100 }, { 100,100,100 }, TS_NO_SCALE);
 	skyBoxCube->setDiffuseTextureId(cubeMapTexture);
-
 	//Table
-	cbTableTop = new Cube(6.0f, 0.15f, 3.0f, { 0.0,0.5,-3.0 }, TEXSCALE::TS_SCALE);
+	cbTableTop = new Cube(1.0f, 0.15f, 3.2f, { 5.49, 1.30, -3 }, TEXSCALE::TS_SCALE);
 	cbTableTop->setDiffuseTextureId(floorTexture);
 
-	cbTableButtom = new Cube(4.0f, 1.0, 2.0f, { 0.0, 0.0, -3.0 }, TEXSCALE::TS_SCALE);
+	cbTableButtom = new Cube(1.0f, 1.45, 4.0f, { 5.49, 0.5, -3.0 }, TEXSCALE::TS_SCALE);
 	cbTableButtom->setDiffuseTextureId(metalTexture);
 
-	topAquarium = new Cube(6.0f, 0.15f, 3.0f, { 0.0, 3.1, -3.0 }, TEXSCALE::TS_SCALE);
-	topAquarium->setDiffuseTextureId(floorTexture);
+	//topAquarium = new Cube(6.0f, 0.15f, 3.0f, { 0.0, 3.1, -3.0 }, TEXSCALE::TS_SCALE);
+	//topAquarium->setDiffuseTextureId(floorTexture);
 
 	//Aquarium walls
-	front = new AquariumPane(5.0f, 2.5f, { 0.0f, 1.8, -2 }, TS_NO_SCALE, OR_XY);
+	front = new AquariumPane(1.0f, 1.0f, { 5.5,1.8,-1.5 }, TS_NO_SCALE, OR_XY);
 	front->setDiffuseTextureId(waterTexture);
 
-	back = new AquariumPane(5.0f, 2.5f, { 0.0f, 1.8, -4 }, TS_NO_SCALE, OR_XY);
+	back = new AquariumPane(1.0f, 1.0f, { 5.5,1.8,-4.5 }, TS_NO_SCALE, OR_XY);
 	back->setDiffuseTextureId(waterTexture);
 
-	right = new AquariumPane(2.5f, 2.0f, { 2.5f, 1.8, -3 }, TS_NO_SCALE, OR_ZY);
+	right = new AquariumPane(1.0f, 3.0f, { 5.99f, 1.8, -3 }, TS_NO_SCALE, OR_ZY);
 	right->setDiffuseTextureId(waterTexture);
 
-	left = new AquariumPane(2.5f, 2.0f, { -2.5f, 1.8, -3 }, TS_NO_SCALE, OR_ZY);
+	left = new AquariumPane(1.0f, 3.0f, { 5.0f, 1.8, -3 }, TS_NO_SCALE, OR_ZY);
 	left->setDiffuseTextureId(waterTexture);
 
-	sandFloor = new Plane(5, 2, { 0, 0.59, -3 }, TS_NO_SCALE, OR_XZ);
+	sandFloor = new Plane(1.0f, 3.0f, { 5.49, 1.4, -3 }, TS_NO_SCALE, OR_XZ);
 	sandFloor->setDiffuseTextureId(sandTexture);
+	
 
 
 	//Aquarium dynamic life

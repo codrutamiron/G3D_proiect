@@ -95,7 +95,7 @@ void Mesh::renderMesh() const
 
 void Mesh::renderBasic(const Shader& shader, const glm::vec3& offsetPosition) const
 {
-	auto model = glm::mat4();
+	auto model = glm::mat4(1.0f);
 	model = glm::translate(model, this->getPosition() + offsetPosition);
 	shader.SetMat4("model", model);
 	glActiveTexture(GL_TEXTURE0);
