@@ -1,0 +1,14 @@
+# Blender MTL File: 'Starfish.blend'
+# Material Count: 1
+
+newmtl stella_LOW
+Ns 35.999996
+Ka 1.000000 1.000000 1.000000
+Kd 0.351533 0.351533 0.351533
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump Stella Normal.png
+map_Kd Diffuse Stella low.png
