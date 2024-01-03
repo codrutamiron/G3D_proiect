@@ -213,9 +213,11 @@ Plane* painting1, * painting2, * painting3, * door;
 int main(int argc, char** argv)
 {
 	std::string strFullExeFileName = argv[0];
-	const size_t last_slash_idx = strFullExeFileName.rfind('\\');
+	size_t last_slash_idx = strFullExeFileName.rfind('\\');
 	if (std::string::npos != last_slash_idx) {
-		strExePath = strFullExeFileName.substr(0, last_slash_idx);
+		std::string debugPath = strFullExeFileName.substr(0, last_slash_idx);
+		last_slash_idx = debugPath.rfind('\\');
+		strExePath = strFullExeFileName.substr(0, last_slash_idx).append("\\G3D_proiect");
 	}
 
 	//glfw: initialize and configure
