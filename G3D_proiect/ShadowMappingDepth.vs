@@ -8,3 +8,6 @@ void main()
 {
     gl_Position = lightSpaceMatrix * model * vec4(aPos, 1.0);
 }
+
+
+

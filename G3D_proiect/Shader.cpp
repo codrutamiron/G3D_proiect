@@ -1,8 +1,4 @@
 #include "Shader.h"
-#include <fstream>
-#include <sstream>
-#include <iostream>
-
 
 void Shader::Use() const
 {
@@ -113,6 +109,5 @@ void Shader::CheckCompileErrors(unsigned shaderStencilTesting, std::string type)
 		}
 	}
 }
-
 
 

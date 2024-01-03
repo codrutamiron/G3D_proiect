@@ -38,12 +38,12 @@ Mesh::~Mesh()
 	glDeleteBuffers(1, &meshVBO);
 }
 
-void Mesh::setDiffuseTextureId(unsigned dti)
+void Mesh::setDiffuseTextureId(unsigned int dti)
 {
 	diffuseTextureId = dti;
 }
 
-unsigned Mesh::getDiffuseTextureId() const
+unsigned int Mesh::getDiffuseTextureId() const
 {
 	return diffuseTextureId;
 }

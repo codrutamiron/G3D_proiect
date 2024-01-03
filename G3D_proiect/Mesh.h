@@ -1,12 +1,10 @@
 #pragma once
-#include <GLM.hpp>
-#include <gtc/matrix_transform.hpp>
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h> 
+#include "libs.h"
 #include <vector>
-
 #include "IRenderable.h"
 #include "Vertex.h"
 #include "Shader.h"
@@ -29,7 +27,7 @@ public:
 
 	void setDiffuseTextureId(unsigned int dti);
 
-	unsigned getDiffuseTextureId() const override;
+	unsigned int getDiffuseTextureId() const override;
 
 	glm::vec3 getPosition() const override;
 

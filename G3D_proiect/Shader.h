@@ -1,10 +1,11 @@
 #pragma once
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h> 
 #include "libs.h"
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <glm.hpp>
+
+#define GLM_FORCE_CTOR_INIT 
 
 
 #include <iostream>
