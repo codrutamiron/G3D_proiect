@@ -33,9 +33,6 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -60,9 +57,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cube.cpp">
@@ -92,6 +86,12 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="CubeMap.vs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="ShaderInsideWater.fs">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="ShaderInsideWater.vs">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
