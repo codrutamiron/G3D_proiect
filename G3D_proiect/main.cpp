@@ -8,7 +8,8 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
-
+#define TINYOBJLOADER_IMPLEMENTATION
+#include "tiny_obj_loader.h"
 double deltaTime = 0.0f;	// time between current frame and last frame
 double lastFrame = 0.0f;
 const unsigned int SCR_WIDTH = 1800;
