@@ -225,7 +225,7 @@ int main(int argc, char** argv)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	//glfw window creation
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Lab8 - Maparea umbrelor", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Acvariu", NULL, NULL);
 	if (window == NULL) {
 		std::cout << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
@@ -612,27 +612,27 @@ void createObjects()
 	//=============
 
 	unsigned int cubeMapTexture = loadCubemap({
-		strExePath + "\\skybox\\right.jpg",
-		strExePath + "\\skybox\\left.jpg",
-		strExePath + "\\skybox\\top.jpg",
-		strExePath + "\\skybox\\bottom.jpg",
-		strExePath + "\\skybox\\front.jpg",
-		strExePath + "\\skybox\\back.jpg"
+		strExePath + "\\Pictures\\skybox\\right.jpg",
+		strExePath + "\\Pictures\\skybox\\left.jpg",
+		strExePath + "\\Pictures\\skybox\\top.jpg",
+		strExePath + "\\Pictures\\skybox\\bottom.jpg",
+		strExePath + "\\Pictures\\skybox\\front.jpg",
+		strExePath + "\\Pictures\\skybox\\back.jpg"
 		});
 
-	unsigned int metalTexture = CreateTexture(strExePath + "\\stones.jpg");
-	unsigned int insideWaterTexture = CreateTexture(strExePath + "\\insideWater.png");
-	unsigned int bubbleTexture = CreateTexture(strExePath + "\\bubble.png");
-	unsigned int floorTexture = CreateTexture(strExePath + "\\ColoredFloor.png");
-	unsigned int waterTexture = CreateTexture(strExePath + "\\water.png");
-	unsigned int sandTexture = CreateTexture(strExePath + "\\sandTexture.png");
-	unsigned int wallTexture = CreateTexture(strExePath + "\\wall.png");
-	unsigned int sofaTexture = CreateTexture(strExePath + "\\sofa.png");
-	unsigned int glassTexture = CreateTexture(strExePath + "\\glass.png");
-	unsigned int painting1Tex = CreateTexture(strExePath + "\\painting1.png");
-	unsigned int painting2Tex = CreateTexture(strExePath + "\\painting2.png");
-	unsigned int painting3Tex = CreateTexture(strExePath + "\\painting3.png");
-	unsigned int doorTex = CreateTexture(strExePath + "\\door.png");
+	unsigned int metalTexture = CreateTexture(strExePath + "\\Pictures\\stones.jpg");
+	unsigned int insideWaterTexture = CreateTexture(strExePath + "\\Pictures\\insideWater.png");
+	unsigned int bubbleTexture = CreateTexture(strExePath + "\\Pictures\\bubble.png");
+	unsigned int floorTexture = CreateTexture(strExePath + "\\Pictures\\ColoredFloor.png");
+	unsigned int waterTexture = CreateTexture(strExePath + "\\Pictures\\water.png");
+	unsigned int sandTexture = CreateTexture(strExePath + "\\Pictures\\sandTexture.png");
+	unsigned int wallTexture = CreateTexture(strExePath + "\\Pictures\\wall.png");
+	unsigned int sofaTexture = CreateTexture(strExePath + "\\Pictures\\sofa.png");
+	unsigned int glassTexture = CreateTexture(strExePath + "\\Pictures\\glass.png");
+	unsigned int painting1Tex = CreateTexture(strExePath + "\\Pictures\\painting1.png");
+	unsigned int painting2Tex = CreateTexture(strExePath + "\\Pictures\\painting2.png");
+	unsigned int painting3Tex = CreateTexture(strExePath + "\\Pictures\\painting3.png");
+	unsigned int doorTex = CreateTexture(strExePath + "\\Pictures\\door.png");
 
 	//=============
 	//Create Objects
@@ -746,8 +746,8 @@ void createObjects()
 
 
 	//Aquarium dynamic life
-	fish1 = CreateObj(strExePath + "\\fish1\\12265_Fish_v1_L2.obj");
-	unsigned fishTexture1 = CreateTexture(strExePath + "\\fish1\\fish.jpg");
+	fish1 = CreateObj(strExePath + "\\Pictures\\fish1\\12265_Fish_v1_L2.obj");
+	unsigned fishTexture1 = CreateTexture(strExePath + "\\Pictures\\fish1\\fish.jpg");
 	fish1->setDiffuseTextureId(fishTexture1);
 	{
 		glm::mat4 fishModelModify = glm::rotate(glm::mat4(), -3.14f * 0.5f, glm::vec3(1, 0, 0));
@@ -755,8 +755,8 @@ void createObjects()
 		fish1->applyModelTransform(fishModelModify);
 	}
 
-	fish2 = CreateObj(strExePath + "\\fish2\\fish.obj");
-	unsigned fishTexture2 = CreateTexture(strExePath + "\\fish2\\fish_texture.png");
+	fish2 = CreateObj(strExePath + "\\Pictures\\fish2\\fish.obj");
+	unsigned fishTexture2 = CreateTexture(strExePath + "\\Pictures\\fish2\\fish_texture.png");
 	fish2->setDiffuseTextureId(fishTexture2);
 	{
 		glm::mat4 fishModelModify = glm::mat4();
@@ -764,8 +764,8 @@ void createObjects()
 		fish2->applyModelTransform(fishModelModify);
 	}
 
-	fish3 = CreateObj(strExePath + "\\fish1\\12265_Fish_v1_L2.obj");
-	unsigned fishTexture3 = CreateTexture(strExePath + "\\fish1\\fish3.jpg");
+	fish3 = CreateObj(strExePath + "\\Pictures\\fish1\\12265_Fish_v1_L2.obj");
+	unsigned fishTexture3 = CreateTexture(strExePath + "\\Pictures\\fish1\\fish3.jpg");
 	{
 		glm::mat4 fishModelModify = glm::rotate(glm::mat4(), -3.14f * 0.5f, glm::vec3(1, 0, 0));
 		fishModelModify = glm::scale(fishModelModify, { 0.02, 0.02, 0.02 });
@@ -773,8 +773,8 @@ void createObjects()
 	}
 	fish3->setDiffuseTextureId(fishTexture3);
 
-	fish4 = CreateObj(strExePath + "\\fish1\\12265_Fish_v1_L2.obj");
-	unsigned fishTexture4 = CreateTexture(strExePath + "\\fish1\\fish4.jpg");
+	fish4 = CreateObj(strExePath + "\\Pictures\\fish1\\12265_Fish_v1_L2.obj");
+	unsigned fishTexture4 = CreateTexture(strExePath + "\\Pictures\\fish1\\fish4.jpg");
 	{
 		glm::mat4 fishModelModify = glm::rotate(glm::mat4(), -3.14f * 0.5f, glm::vec3(1, 0, 0));
 		fishModelModify = glm::scale(fishModelModify, { 0.02, 0.02, 0.02 });
@@ -783,8 +783,8 @@ void createObjects()
 	fish4->setDiffuseTextureId(fishTexture4);
 
 	//Aquarium static life
-	coral1 = CreateObj(strExePath + "\\coral1\\coral1.obj");
-	unsigned coralTexture1 = CreateTexture(strExePath + "\\coral1\\coral1.jpg");
+	coral1 = CreateObj(strExePath + "\\Pictures\\coral1\\coral1.obj");
+	unsigned coralTexture1 = CreateTexture(strExePath + "\\Pictures\\coral1\\coral1.jpg");
 	coral1->setDiffuseTextureId(coralTexture1);
 	{
 		glm::mat4 coralModelModify = glm::mat4();
@@ -796,14 +796,14 @@ void createObjects()
 	}
 	coral1->setDiffuseTextureId(coralTexture1);
 
-	shell1 = CreateObj(strExePath + "\\shell1\\seashell.obj");
-	unsigned shellTexture1 = CreateTexture(strExePath + "\\shell1\\seashell.jpg");
+	shell1 = CreateObj(strExePath + "\\Pictures\\shell1\\seashell.obj");
+	unsigned shellTexture1 = CreateTexture(strExePath + "\\Pictures\\shell1\\seashell.jpg");
 	shell1->setDiffuseTextureId(shellTexture1);
 	shell1->setPosition({ 1,0.65,-3 });
 
 
-	star = CreateObj(strExePath + "\\shell2\\star1.obj");
-	unsigned shellTexture2 = CreateTexture(strExePath + "\\shell2\\star1.png");
+	star = CreateObj(strExePath + "\\Pictures\\shell2\\star1.obj");
+	unsigned shellTexture2 = CreateTexture(strExePath + "\\Pictures\\shell2\\star1.png");
 	star->setDiffuseTextureId(shellTexture1);
 	{
 		glm::mat4 fishModelModify = glm::mat4();
