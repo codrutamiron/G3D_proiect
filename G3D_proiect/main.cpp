@@ -394,22 +394,33 @@ int main(int argc, char** argv)
 void updateFishPosition()
 {
 	{
-		static glm::vec3 fishStartPosition = { 0.0f, 1.8, -3 };
-		static float fishRadius = 0.5;
-		fish1->setPosition(glm::vec3{ std::sinf(currentFrame) * fishRadius * 3, std::sinf(currentFrame) * std::cosf(currentFrame) * fishRadius, std::cosf(currentFrame) * fishRadius } + fishStartPosition);
+
+		static glm::vec3 fishStartPosition = { 5.2f, 1.6f, -3.0f };
+		static float fishRadius = 0.1f;
+
+		float backAndForthMovement = std::sinf(currentFrame) * fishRadius * 4.0f;
+
+		fish1->setPosition(glm::vec3{ fishStartPosition.x, fishStartPosition.y, fishStartPosition.z + backAndForthMovement });
+
+	}
+
+	{
+		static glm::vec3 fishStartPosition = { 5.55f, 1.9f, -3.0f };
+		static float fishRadius = 0.2f;
+
+		float frontToBackMovement = std::sinf(currentFrame) * fishRadius * 5.0f;
+		float rightToLeftMovement = std::cosf(currentFrame) * std::sinf(currentFrame) * fishRadius;
+		float upAndDownMovement = std::cosf(currentFrame) * fishRadius;
+
+		fish2->setPosition(glm::vec3{ fishStartPosition.x, fishStartPosition.y + upAndDownMovement, fishStartPosition.z + frontToBackMovement });
 	}
 	{
-		static glm::vec3 fishStartPosition = { 0.0f, 2.3, -3 };
-		static float fishRadius = 0.4;
-		fish2->setPosition(glm::vec3{ std::cosf(currentFrame) * fishRadius * 6, std::sinf(currentFrame) * std::cosf(currentFrame) * fishRadius, std::sinf(currentFrame) * fishRadius } + fishStartPosition);
-	}
-	{
-		static glm::vec3 fishStartPosition = { -2.f, 1.4, -2.6 };
+		static glm::vec3 fishStartPosition = { 5.3f, 1.6, -2 };
 		static float fishRadius = 0.08;
 		fish3->setPosition(glm::vec3{ std::sinf(currentFrame) * fishRadius, std::sinf(currentFrame) * fishRadius, std::sinf(currentFrame) * fishRadius } + fishStartPosition);
 	}
 	{
-		static glm::vec3 fishStartPosition = { 2.f, 1.2, -3.5 };
+		static glm::vec3 fishStartPosition = { 5.3f, 1.6, -4 };
 		static float fishRadius = 0.04;
 		fish4->setPosition(glm::vec3{ std::sinf(currentFrame) * fishRadius, std::sinf(currentFrame) * fishRadius, std::sinf(currentFrame) * fishRadius } + fishStartPosition);
 	}
@@ -478,65 +489,67 @@ void subrenderObjects(const Shader& shader)
 	cbTableButtom->renderBasic(shader);
 
 	//fish
-	model = glm::mat4();
+
+	model = glm::mat4(1.0f);
 	model = glm::translate(model, fish1->getPosition());
-	model = glm::rotate(model, currentFrame + 3.1415f, { 0,1,0 });
+	model = glm::rotate(model, -currentFrame, { 0,1,0 });
+	model = glm::scale(model, glm::vec3{ 0.3,0.3, 0.3 });
 	fish1->renderCustomModel(shader, model);
 
 	//Fish2
-	model = glm::mat4();
+	model = glm::mat4(1.0f);
 	model = glm::translate(model, fish2->getPosition());
 	model = glm::rotate(model, -currentFrame, { 0,1,0 });
+	model = glm::scale(model, glm::vec3{ 0.5,0.5, 0.5 });
 	fish2->renderCustomModel(shader, model);
 
 	//Fish3
-	model = glm::mat4();
-	model = glm::translate(model, fish3->getPosition());
+	model = glm::mat4(1.0f);
+	model = glm::translate(model, fish3->getPosition() + glm::vec3{ 0,0,0.3 });
 	model = glm::rotate(model, -currentFrame * 0.04f, { 0,1,0 });
 	fish3->renderCustomModel(shader, model);
 
 	//Fish4
-	model = glm::mat4();
-	model = glm::translate(model, fish4->getPosition());
+	model = glm::mat4(1.0f);
+	model = glm::translate(model, fish4->getPosition() + glm::vec3{ 0,0,0.3 });
 	model = glm::rotate(model, currentFrame * 0.04f, { 0,1,0 });
 	fish4->renderCustomModel(shader, model);
 
 	//Coral
-	model = glm::mat4();
-	model = glm::translate(model, coral1->getPosition() + glm::vec3{ 0.5,0,0 });
+	model = glm::mat4(1.0f);
+	model = glm::translate(model, coral1->getPosition());
 	coral1->renderCustomModel(shader, model);
 
-	model = glm::mat4();
-	model = glm::translate(model, coral1->getPosition() + glm::vec3{ 2.0,0,0.4 });
-	model = glm::scale(model, { 0.6, 0.9, 0.7 });
+	model = glm::mat4(1.0f);
+	model = glm::translate(model, coral1->getPosition() + glm::vec3{ 0.2,0 , 1.5 });
+	model = glm::scale(model, glm::vec3{ 1.1,1.1, 1.1 });
 	coral1->renderCustomModel(shader, model);
 
-	model = glm::mat4();
-	model = glm::translate(model, coral1->getPosition() + glm::vec3{ -1.3,0,0 });
-	model = glm::scale(model, { 1.6, 1.3, 1.1 });
-	coral1->renderCustomModel(shader, model);
 
 	//Shell
-	model = glm::mat4();
-	model = glm::translate(model, shell1->getPosition() + glm::vec3{ 0.2,0,0.3 });
+	model = glm::mat4(1.0f);
+	model = glm::translate(model, shell1->getPosition() + glm::vec3{ -0.2,0,0 });
+	model = glm::scale(model, glm::vec3{ 0.3, 0.4, 0.5 });
 	shader.SetMat4("model", model);
 	shell1->renderCustomModel(shader, model);
 
-	model = glm::mat4();
-	model = glm::translate(model, shell1->getPosition() + glm::vec3{ -2.2,0,-0.3 });
-	model = glm::rotate(model, 3.14159f * 0.5f, glm::vec3{ 0, 1, 0 });
-	model = glm::scale(model, glm::vec3{ 0.5, 0.6, 0.8 });
-	shell1->renderCustomModel(shader, model);
 
-	model = glm::mat4();
-	model = glm::translate(model, shell1->getPosition() + glm::vec3{ -2.5,0,+0.4 });
-	model = glm::rotate(model, 3.14159f * 0.7f, glm::vec3{ 0, 1, 0 });
-	model = glm::scale(model, glm::vec3{ 0.6, 0.6, 0.9 });
-	shell1->renderCustomModel(shader, model);
+
+
 
 	//Star
-	star->renderBasic(shader);
-	star->renderBasic(shader, { 1.7f, 0.f, -0.8f });
+	model = glm::mat4(1.0f);
+	model = glm::translate(model, star->getPosition());
+	model = glm::scale(model, glm::vec3{ 0.5, 0.5, 0.5 });
+	shader.SetMat4("model", model);
+	star->renderCustomModel(shader, model);
+
+	model = glm::mat4(1.0f);
+	model = glm::translate(model, star->getPosition() + glm::vec3(0, 0, -2));
+	model = glm::scale(model, glm::vec3{ 0.5, 0.5, 0.5 });
+	shader.SetMat4("model", model);
+	star->renderCustomModel(shader, model);
+
 
 	//Top Aquarium
 	//topAquarium->renderBasic(shader);
@@ -664,11 +677,11 @@ void createObjects()
 	plnWallBack2 = new Plane(glm::vec3{ 0, -0.2, 5 }, { 6,5,5 }, TEXSCALE::TS_SCALE);
 	plnWallBack2->setDiffuseTextureId(wallTexture);
 
-	plnWallLeft1 = new Plane(glm::vec3{ -6, -0.2, 5}, { -6,5,-2.1 }, TEXSCALE::TS_NO_SCALE);
+	plnWallLeft1 = new Plane(glm::vec3{ -6, -0.2, 5 }, { -6,5,-2.1 }, TEXSCALE::TS_NO_SCALE);
 	plnWallLeft1->setDiffuseTextureId(wallTexture);
 
 	plnWallLeft2 = new Plane(glm::vec3{ -6, -0.2, -7 }, { -6,5,-10 }, TEXSCALE::TS_SCALE);
-	plnWallLeft2->setDiffuseTextureId(wallTexture); 
+	plnWallLeft2->setDiffuseTextureId(wallTexture);
 
 	plnWallLeftBtm = new Plane(glm::vec3{ -6, -0.2, 1 }, { -6,1.2,-7 }, TEXSCALE::TS_NO_SCALE);
 	plnWallLeftBtm->setDiffuseTextureId(wallTexture);
@@ -743,7 +756,7 @@ void createObjects()
 
 	sandFloor = new Plane(1.0f, 3.0f, { 5.49, 1.4, -3 }, TS_NO_SCALE, OR_XZ);
 	sandFloor->setDiffuseTextureId(sandTexture);
-	
+
 
 
 	//Aquarium dynamic life
@@ -751,7 +764,7 @@ void createObjects()
 	unsigned fishTexture1 = CreateTexture(strExePath + "\\Pictures\\fish1\\fish.jpg");
 	fish1->setDiffuseTextureId(fishTexture1);
 	{
-		glm::mat4 fishModelModify = glm::rotate(glm::mat4(), -3.14f * 0.5f, glm::vec3(1, 0, 0));
+		glm::mat4 fishModelModify = glm::rotate(glm::mat4(1.0f), -3.14f * 0.5f, glm::vec3(1, 0, 0));
 		fishModelModify = glm::scale(fishModelModify, { 0.02, 0.02, 0.02 });
 		fish1->applyModelTransform(fishModelModify);
 	}
@@ -760,16 +773,16 @@ void createObjects()
 	unsigned fishTexture2 = CreateTexture(strExePath + "\\Pictures\\fish2\\fish_texture.png");
 	fish2->setDiffuseTextureId(fishTexture2);
 	{
-		glm::mat4 fishModelModify = glm::mat4();
-		fishModelModify = glm::scale(glm::mat4(), { 0.2, 0.2, 0.2 });
+		glm::mat4 fishModelModify = glm::mat4(1.0f);
+		fishModelModify = glm::scale(glm::mat4(1.0f), { 0.2, 0.2, 0.2 });
 		fish2->applyModelTransform(fishModelModify);
 	}
 
 	fish3 = CreateObj(strExePath + "\\Pictures\\fish1\\12265_Fish_v1_L2.obj");
 	unsigned fishTexture3 = CreateTexture(strExePath + "\\Pictures\\fish1\\fish3.jpg");
 	{
-		glm::mat4 fishModelModify = glm::rotate(glm::mat4(), -3.14f * 0.5f, glm::vec3(1, 0, 0));
-		fishModelModify = glm::scale(fishModelModify, { 0.02, 0.02, 0.02 });
+		glm::mat4 fishModelModify = glm::rotate(glm::mat4(1.0f), -3.14f * 0.5f, glm::vec3(1, 0, 0));
+		fishModelModify = glm::scale(fishModelModify, { 0.01, 0.01, 0.01 });
 		fish3->applyModelTransform(fishModelModify);
 	}
 	fish3->setDiffuseTextureId(fishTexture3);
@@ -777,8 +790,8 @@ void createObjects()
 	fish4 = CreateObj(strExePath + "\\Pictures\\fish1\\12265_Fish_v1_L2.obj");
 	unsigned fishTexture4 = CreateTexture(strExePath + "\\Pictures\\fish1\\fish4.jpg");
 	{
-		glm::mat4 fishModelModify = glm::rotate(glm::mat4(), -3.14f * 0.5f, glm::vec3(1, 0, 0));
-		fishModelModify = glm::scale(fishModelModify, { 0.02, 0.02, 0.02 });
+		glm::mat4 fishModelModify = glm::rotate(glm::mat4(1.0f), -3.14f * 0.5f, glm::vec3(1, 0, 0));
+		fishModelModify = glm::scale(fishModelModify, { 0.005, 0.005, 0.005 });
 		fish4->applyModelTransform(fishModelModify);
 	}
 	fish4->setDiffuseTextureId(fishTexture4);
@@ -788,35 +801,35 @@ void createObjects()
 	unsigned coralTexture1 = CreateTexture(strExePath + "\\Pictures\\coral1\\coral1.jpg");
 	coral1->setDiffuseTextureId(coralTexture1);
 	{
-		glm::mat4 coralModelModify = glm::mat4();
+		glm::mat4 coralModelModify = glm::mat4(1.0f);
 		coralModelModify = glm::rotate(coralModelModify, glm::radians(-90.0f), { 1,0,0 });
-		coralModelModify = glm::scale(coralModelModify, { 0.02, 0.02, 0.02 });
+		coralModelModify = glm::scale(coralModelModify, { 0.01, 0.01, 0.01 });
 		coral1->applyModelTransform(coralModelModify);
 
-		coral1->setPosition({ 0,0.65,-3 });
+		coral1->setPosition({ 5.4,1.4,-3.5 });
 	}
 	coral1->setDiffuseTextureId(coralTexture1);
 
 	shell1 = CreateObj(strExePath + "\\Pictures\\shell1\\seashell.obj");
 	unsigned shellTexture1 = CreateTexture(strExePath + "\\Pictures\\shell1\\seashell.jpg");
 	shell1->setDiffuseTextureId(shellTexture1);
-	shell1->setPosition({ 1,0.65,-3 });
+	shell1->setPosition({ 5.5,1.4,-2 });
 
 
 	star = CreateObj(strExePath + "\\Pictures\\shell2\\star1.obj");
 	unsigned shellTexture2 = CreateTexture(strExePath + "\\Pictures\\shell2\\star1.png");
 	star->setDiffuseTextureId(shellTexture1);
 	{
-		glm::mat4 fishModelModify = glm::mat4();
+		glm::mat4 fishModelModify = glm::mat4(1.0f);
 		fishModelModify = glm::rotate(fishModelModify, glm::radians(-80.0f), glm::normalize(glm::vec3{ 1,0,-0.5 }));
-		fishModelModify = glm::scale(fishModelModify, { 0.3, 0.3, 0.3 });
+		fishModelModify = glm::scale(fishModelModify, { 0.2, 0.2, 0.2 });
 		star->applyModelTransform(fishModelModify);
 
-		star->setPosition({ -0.7,0.67,-2.3 });
+		star->setPosition({ 5.5,1.4,-2.3 });
 	}
 
 	//Billboards
-	bubble = new BubbleParticleGenerator(.3, .1);
+	bubble = new BubbleParticleGenerator(.05, .05);
 	bubble->setDiffuseTextureId(bubbleTexture);
 
 	overlay = new AquariumPane(25, 25, { 0,0,0 }, TS_NO_SCALE, OR_XZ);
