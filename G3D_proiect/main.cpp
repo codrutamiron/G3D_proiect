@@ -722,7 +722,7 @@ void createObjects()
 	cbTableTop = new Cube(1.0f, 0.15f, 3.2f, { 5.49, 1.30, -3 }, TEXSCALE::TS_SCALE);
 	cbTableTop->setDiffuseTextureId(floorTexture);
 
-	cbTableButtom = new Cube(1.0f, 1.45, 4.0f, { 5.49, 0.5, -3.0 }, TEXSCALE::TS_SCALE);
+	cbTableButtom = new Cube(1.0f, 1.41, 4.0f, { 5.49, 0.51, -3.0 }, TEXSCALE::TS_SCALE);
 	cbTableButtom->setDiffuseTextureId(metalTexture);
 
 	//topAquarium = new Cube(6.0f, 0.15f, 3.0f, { 0.0, 3.1, -3.0 }, TEXSCALE::TS_SCALE);

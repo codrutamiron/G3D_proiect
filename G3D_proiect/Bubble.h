@@ -55,8 +55,8 @@ public:
 
 
 protected:
-	glm::vec3 coord_min = { 5.2,0.5,-4.2 };
-	glm::vec3 coord_max = { 5.9,2,-2 };
+	glm::vec3 coord_min = { 5.2,1.3,-4.2 };
+	glm::vec3 coord_max = { 5.8,2,-2 };
 
 	std::pair<float, float> speedLimits = { 0.5f, 0.6f };
 	std::pair<float, float> radiusLimits = { 0.0f, 0.6f };
