@@ -197,7 +197,8 @@ Plane* sandFloor;
 Cube* cbTableTop, * cbTableButtom;
 AquariumPane* front, * back, * right, * left;
 Mesh* fish1, * fish2, * fish3, * fish4;
-Mesh* coral1, * shell1, * star, *tableChairs;
+Mesh* coral1, * shell1, * star, *vase;
+Cube* table;
 BubbleParticleGenerator* bubble;
 AquariumPane* overlay;
 Cube* skyBoxCube;
@@ -372,11 +373,13 @@ int main(int argc, char** argv)
 		bubble->updateParticles(currentFrame);
 
 		//Water Overlay
-		if (IsPointInsideRegion({ -3,0.5,-4 }, { 3,3,-2 }, pCamera->GetPosition()))
+		
+		if (IsPointInsideRegion({5,1.4,-4.6 }, { 5.99,2.3, -1.5}, pCamera->GetPosition()))
 		{
-			shaderWater.SetMat4("projection", glm::mat4());
-			shaderWater.SetMat4("view", glm::mat4());
-			renderInsideWaterOverlay(shaderWater);
+			shaderWater.Use();
+			shaderWater.SetMat4("projection", glm::mat4(1.0f));
+			shaderWater.SetMat4("view", glm::mat4(1.0f));
+		renderInsideWaterOverlay(shaderWater);
 		}
 
 		//glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -487,6 +490,7 @@ void subrenderObjects(const Shader& shader)
 	//Table
 	cbTableTop->renderBasic(shader);
 	cbTableButtom->renderBasic(shader);
+	table->renderBasic(shader);
 
 	//fish
 
@@ -534,9 +538,6 @@ void subrenderObjects(const Shader& shader)
 	shell1->renderCustomModel(shader, model);
 
 
-
-
-
 	//Star
 	model = glm::mat4(1.0f);
 	model = glm::translate(model, star->getPosition());
@@ -550,9 +551,12 @@ void subrenderObjects(const Shader& shader)
 	shader.SetMat4("model", model);
 	star->renderCustomModel(shader, model);
 
-
-	//Top Aquarium
-	//topAquarium->renderBasic(shader);
+	//Vase
+	model = glm::mat4(1.0f);
+	model = glm::translate(model,vase->getPosition());
+	model = glm::scale(model, glm::vec3{ 0.5, 0.5, 0.5 });
+	shader.SetMat4("model", model);
+	vase->renderCustomModel(shader, model);
 }
 
 
@@ -574,7 +578,7 @@ void renderTranslucid(const Shader& shader)
 	//Render room glass
 	plnFrontWindow->renderBasic(shader);
 	plnLeftWindow->renderBasic(shader);
-
+	//overlay->renderBasic(shader);
 	std::vector<IRenderable*> sorted;
 
 	//Bubble
@@ -615,7 +619,6 @@ void renderInsideWaterOverlay(const Shader& shader)
 {
 	glEnable(GL_CULL_FACE);
 	shader.Use();
-
 	overlay->renderBasic(shader);
 }
 
@@ -634,6 +637,8 @@ void createObjects()
 		strExePath + "\\Pictures\\skybox\\back.jpg"
 		});
 
+
+	unsigned int tableTexture = CreateTexture(strExePath + "\\Pictures\\table.jpg");
 	unsigned int metalTexture = CreateTexture(strExePath + "\\Pictures\\stones.jpg");
 	unsigned int insideWaterTexture = CreateTexture(strExePath + "\\Pictures\\insideWater.png");
 	unsigned int bubbleTexture = CreateTexture(strExePath + "\\Pictures\\bubble.png");
@@ -738,6 +743,9 @@ void createObjects()
 	cbTableButtom = new Cube(1.0f, 1.41, 4.0f, { 5.49, 0.51, -3.0 }, TEXSCALE::TS_SCALE);
 	cbTableButtom->setDiffuseTextureId(metalTexture);
 
+	table = new Cube(4.0f, 1.0, 2.0f, { 0.0, 0.0, -3.0 }, TEXSCALE::TS_SCALE);
+	table->setDiffuseTextureId(tableTexture);
+
 	//topAquarium = new Cube(6.0f, 0.15f, 3.0f, { 0.0, 3.1, -3.0 }, TEXSCALE::TS_SCALE);
 	//topAquarium->setDiffuseTextureId(floorTexture);
 
@@ -828,22 +836,20 @@ void createObjects()
 		star->setPosition({ 5.5,1.4,-2.3 });
 	}
 
-	tableChairs = CreateObj(strExePath + "\\Pictures\\table\\tableChairs.obj");
-	unsigned tableChairsTexture1 = CreateTexture(strExePath + "\\Pictures\\table\\table.jpg");
-
+	vase = CreateObj(strExePath + "\\Pictures\\vase\\vase.obj");
+	unsigned vaseTexture = CreateTexture(strExePath + "\\Pictures\\vase\\vase.jpg");
+	vase->setDiffuseTextureId(vaseTexture);
 	{
-
-		glm::mat4 tableChairsModelModify = glm::rotate(glm::mat4(1.0f), -3.14f * 0.5f, glm::vec3(1, 0, 0));
-		tableChairsModelModify = glm::scale(tableChairsModelModify, { 0.02, 0.02, 0.02 });
-		fish4->applyModelTransform(tableChairsModelModify);
+		glm::mat4 vaseModelModify = glm::mat4(1.0f);
+		vaseModelModify = glm::scale(vaseModelModify, { 0.1, 0.1, 0.1 });
+		vase->applyModelTransform(vaseModelModify);
+		vase->setPosition({ 0.3,0.49,-3.5});
 	}
-	tableChairs->setDiffuseTextureId(tableChairsTexture1);
-
 	//Billboards
 	bubble = new BubbleParticleGenerator(.05, .05);
 	bubble->setDiffuseTextureId(bubbleTexture);
 
-	overlay = new AquariumPane(25, 25, { 0,0,0 }, TS_NO_SCALE, OR_XZ);
+	overlay = new AquariumPane(25, 25, { 0,0,0 }, TS_NO_SCALE, OR_XY);
 	overlay->setDiffuseTextureId(insideWaterTexture);
 }
 
