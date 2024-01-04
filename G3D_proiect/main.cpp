@@ -197,7 +197,7 @@ Plane* sandFloor;
 Cube* cbTableTop, * cbTableButtom;
 AquariumPane* front, * back, * right, * left;
 Mesh* fish1, * fish2, * fish3, * fish4;
-Mesh* coral1, * shell1, * star;
+Mesh* coral1, * shell1, * star, *tableChairs;
 BubbleParticleGenerator* bubble;
 AquariumPane* overlay;
 Cube* skyBoxCube;
@@ -827,6 +827,17 @@ void createObjects()
 
 		star->setPosition({ 5.5,1.4,-2.3 });
 	}
+
+	tableChairs = CreateObj(strExePath + "\\Pictures\\table\\tableChairs.obj");
+	unsigned tableChairsTexture1 = CreateTexture(strExePath + "\\Pictures\\table\\table.jpg");
+
+	{
+
+		glm::mat4 tableChairsModelModify = glm::rotate(glm::mat4(1.0f), -3.14f * 0.5f, glm::vec3(1, 0, 0));
+		tableChairsModelModify = glm::scale(tableChairsModelModify, { 0.02, 0.02, 0.02 });
+		fish4->applyModelTransform(tableChairsModelModify);
+	}
+	tableChairs->setDiffuseTextureId(tableChairsTexture1);
 
 	//Billboards
 	bubble = new BubbleParticleGenerator(.05, .05);
