@@ -30,7 +30,6 @@
 const unsigned int SCR_WIDTH = 1800;
 const unsigned int SCR_HEIGHT = 900;
 std::string strExePath;
-
 Mesh* CreateObj(const std::string& strObjPath)
 {
 	tinyobj::attrib_t attrib;
@@ -74,14 +73,14 @@ Mesh* CreateObj(const std::string& strObjPath)
 			tinyobj::real_t tx = 0;
 			tinyobj::real_t ty = 0;
 
-			//Check if `normal_index` is zero or positive. negative = no normal data
+			//Check if normal_index is zero or positive. negative = no normal data
 			if (idx.normal_index >= 0) {
 				nx = attrib.normals[3 * size_t(idx.normal_index) + 0];
 				ny = attrib.normals[3 * size_t(idx.normal_index) + 1];
 				nz = attrib.normals[3 * size_t(idx.normal_index) + 2];
 			}
 
-			//Check if `texcoord_index` is zero or positive. negative = no texcoord data
+			//Check if texcoord_index is zero or positive. negative = no texcoord data
 			if (idx.texcoord_index >= 0) {
 				tx = attrib.texcoords[2 * size_t(idx.texcoord_index) + 0];
 				ty = attrib.texcoords[2 * size_t(idx.texcoord_index) + 1];
@@ -817,10 +816,10 @@ void createObjects()
 	}
 
 	//Billboards
-	bubble = new BubbleParticleGenerator(.1, .1);
+	bubble = new BubbleParticleGenerator(.3, .1);
 	bubble->setDiffuseTextureId(bubbleTexture);
 
-	overlay = new AquariumPane(25, 25, { 0,0,0 }, TS_NO_SCALE, OR_XY);
+	overlay = new AquariumPane(25, 25, { 0,0,0 }, TS_NO_SCALE, OR_XZ);
 	overlay->setDiffuseTextureId(insideWaterTexture);
 }
 

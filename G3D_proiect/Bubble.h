@@ -55,13 +55,13 @@ public:
 
 
 protected:
-	glm::vec3 coord_min = { -2.3,0.5,-3.5 };
-	glm::vec3 coord_max = { 2.3,3,-2.5 };
+	glm::vec3 coord_min = { 5.2,0.5,-4.2 };
+	glm::vec3 coord_max = { 5.9,2,-2 };
 
-	std::pair<float, float> speedLimits = { 0.5f, 1.0f };
-	std::pair<float, float> radiusLimits = { 0.0f, 0.4f };
-	std::pair<float, float> sizeLimits = { 0.8f, 2.8f };
-	int numberOfParticles = 20;
+	std::pair<float, float> speedLimits = { 0.5f, 0.6f };
+	std::pair<float, float> radiusLimits = { 0.0f, 0.6f };
+	std::pair<float, float> sizeLimits = { 0.5f, 1.5f };
+	int numberOfParticles = 40;
 
 	std::vector<glm::vec3> coords;
 	std::vector<glm::vec3> original_coords;
